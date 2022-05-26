@@ -1,8 +1,10 @@
+import kotlinx.coroutines.delay
 import java.io.File
 import java.io.FileNotFoundException
 import javax.sound.sampled.AudioSystem
 
-fun playBeats(beats: String, file: String){
+// Suspend tells the compiler that the function can be suspended
+suspend fun playBeats(beats: String, file: String){
     val parts = beats.split("x")
     var count = 0
     for (part in parts){
@@ -10,7 +12,7 @@ fun playBeats(beats: String, file: String){
         if (part == ""){
             playSound(file)
         } else {
-            Thread.sleep(100 * (part.length + 1L))
+            delay(100L * (part.length + 1L))
             if (count < beats.length){
                 playSound(file)
             }
